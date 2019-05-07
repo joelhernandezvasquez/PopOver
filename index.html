@@ -2,6 +2,37 @@
 
 <head>
 <link href="style.css" rel="stylesheet" type="text/css">
+
+
+<script>
+
+function calcPopoverPos(trigger,popover)
+{
+  const triggerRect = trigger.getBoundingClientRect();
+  const popoverRect = popover.getBoundingClientRect();
+  const placement = popover.dataset.placement;
+  const space = 20;
+
+  if(placement==="top")
+  {
+    return 
+    {
+      left:(triggerRect.left + triggerRect.right) / 2 - popoverRect.width / 2
+      top: triggerRect.top - popoverRect.height - space
+    }
+  }
+
+  if(placement==="bottom")
+  {
+    return
+    {
+      left:(triggerRect.left + triggerRect.right) / 2 - popoverRect.width / 2,
+      top: triggerRect.bottom + space
+    }
+  }
+
+}
+</script>
 </head>
 
 
@@ -11,12 +42,12 @@
     
          <div class="top-arrow">
            
-            <input type="image" src="up.svg" class="adjust-icon"> 
+            <input type="image" src="up.svg" class="adjust-icon trigger" data-placement="top"> 
 
          </div>
 
          <div class="left-arrow">
-            <input type="image" src="left.svg" class="adjust-icon">
+            <input type="image" src="left.svg" class="adjust-icon trigger">
          </div>
 
          <div class="text-container">
@@ -33,18 +64,18 @@
          </div>
 
          <div class="right-arrow">
-            <input type="image" src="right.svg" class="adjust-icon">
+            <input type="image" src="right.svg" class="adjust-icon trigger">
          </div>
 
          <div class="down-arrow">
-                <input type="image" src="down.svg" class="adjust-icon">
+                <input type="image" src="down.svg" class="adjust-icon trigger">
          </div>
 
 
         
     </div>
 
-    <div id="pop1">
+    <div id="pop1" class="popover" data-placement="top">
 
             <p>The quick brown fox jumps over the lazy dog</p>
         
@@ -52,7 +83,15 @@
         
         
         
-          <div id="pop2" class="popover" data-placement="right">
+           <!-- <div id="pop2" class="popover" data-placement="right">
+        
+            <p>The quick brown fox jumps over the lazy dog</p>
+        
+          </div> -->
+        
+        
+        
+          <div id="pop3" class="popover trigger" data-placement="bottom">
         
             <p>The quick brown fox jumps over the lazy dog</p>
         
@@ -60,19 +99,52 @@
         
         
         
-          <div id="pop3" class="popover" data-placement="bottom">
+          <!-- <div id="pop4" class="popover" data-placement="left">
         
             <p>The quick brown fox jumps over the lazy dog</p>
         
-          </div>
+          </div>  -->
+
+          <script>
+          
+          const trigger = document.querySelector(".trigger[data-placement=top]");
+          const triggerRect = trigger.getBoundingClientRect();
+          const center = (triggerRect.left + triggerRect.right) / 2;
+
+          // Calculating the popover's left value 
+
+         const popover = document.querySelector(".popover");
+         const popoverRect = popover.getBoundingClientRect();
+       
         
-        
-        
-          <div id="pop4" class="popover" data-placement="left">
-        
-            <p>The quick brown fox jumps over the lazy dog</p>
-        
-          </div>
+        const left = center - popoverRect.width / 2;
+         popover.style.left = `${left}px`;
+
+        //  Getting the trigger's top value
+
+            const triggerTop = triggerRect.top;
+
+//         Calculating the popover's top value 
+//         We can get the popover's height with getBoundingClientRect. Also, let's say the space is 20px for now.
+
+            const space = 20;
+            const top1 = triggerTop - popoverRect.height - space;
+            popover.style.top = `${top1}px`;
+
+           // BUILDING THE BOTTOM POPOVER:
+           const triggerBottom = document.querySelector(".trigger[data-placement=bottom]");
+           const popoverBottom = document.querySelector(".popover");
+           const popoverPosition = calcPopoverPos(triggerBottom,popoverBottom);
+           popoverPosition.style.left = `${popoverPos.left}px`;
+           popoverPosition.style.right = `${popoverPos.right}px`;
+
+
+
+
+
+           
+          
+          </script>
 
 </body>
 
