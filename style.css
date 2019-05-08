@@ -96,10 +96,10 @@ h1
 .popover
 {
     position: absolute;
+    top:0px;
+    left:0px;
     background-color: red;
     max-width: 15em;
-    top:0;
-    left:0;
-   
+    
 }
 

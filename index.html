@@ -17,7 +17,7 @@
          </div>
 
          <div class="left-arrow">
-            <input type="image" src="left.svg" class="adjust-icon trigger">
+            <input type="image" src="left.svg" class="adjust-icon trigger" data-placement="left">
          </div>
 
          <div class="text-container">
@@ -34,15 +34,13 @@
          </div>
 
          <div class="right-arrow">
-            <input type="image" src="right.svg" class="adjust-icon trigger">
+            <input type="image" src="right.svg" class="adjust-icon trigger" data-placement="right">
          </div>
 
          <div class="down-arrow">
-                <input type="image" src="down.svg" class="adjust-icon trigger">
+                <input type="image" src="down.svg" class="adjust-icon trigger" data-placement="bottom">
          </div>
 
-
-        
     </div>
 
     <div id="pop1" class="popover" data-placement="top">
@@ -50,10 +48,96 @@
             <p>The quick brown fox jumps over the lazy dog</p>
         
           </div>
+
+          <div id="pop2" class="popover" data-placement="right">
+
+               <p>The quick brown fox jumps over the lazy dog</p>
+           
+             </div>
+        
+
+          <div id="pop3" class="popover" data-placement="bottom">
+
+               <p>The quick brown fox jumps over the lazy dog</p>
+           
+             </div>
+
+             <div id="pop4" class="popover" data-placement="left">
+
+                  <p>The quick brown fox jumps over the lazy dog</p>
+              
+                </div>
         
         
         
+          <script>
+             // Building the top trigger
+          const topTrigger = document.querySelector(".trigger[data-placement=top]");
+          const topTriggerRect = topTrigger.getBoundingClientRect();
+
+          const center = (topTriggerRect.left + topTriggerRect.right) / 2;
           
+          //Calculating and moving the popover's left value 
+
+          const topPopover = document.querySelector("#pop1");
+          const topPopoverRect = topPopover.getBoundingClientRect();
+         const left = center - topPopoverRect.width/2;
+        
+         topPopover.style.left = `${left}px`;
+
+         // Calculating and moving the top value of the top popover
+         const space = 20;
+         const topValue_topPopover = topTriggerRect.top - topPopoverRect.height - space;
+         topPopover.style.top = `${topValue_topPopover}px`;
+
+         // Building the popover buttom
+
+         const bottomTrigger = document.querySelector(".trigger[data-placement=bottom]");
+       
+         const bottomTriggerRect = bottomTrigger.getBoundingClientRect();
+
+         const bottomPopover = document.querySelector("#pop3");
+         const bottomPopoverRect = bottomPopover.getBoundingClientRect();
+       
+       // Calculating and moving the left and top value of the buttom popover
+         bottomPopover.style.left = (bottomTriggerRect.left + bottomTriggerRect.right) / 2 - bottomPopoverRect.width / 2;
+         bottomPopover.style.top  = bottomTriggerRect.bottom + space;
+
+
+      // Building the popover right
+       const rightTrigger = document.querySelector(".trigger[data-placement=right]");
+       const rightTriggerRect = rightTrigger.getBoundingClientRect();
+
+       const rightPopover = document.querySelector("#pop2");
+       const rightPopoverRect = rightPopover.getBoundingClientRect();
+
+         // Calculating and moving the left and top value of the right popover
+         rightPopover.style.left = rightTriggerRect.right + space;
+         rightPopover.style.top = (rightTriggerRect.top + rightTriggerRect.bottom) / 2 -  rightPopoverRect.height / 2; 
+
+
+          // Building the popover left
+
+           const leftTrigger = document.querySelector(".trigger[data-placement = left]");
+           const leftTriggerRect = leftTrigger.getBoundingClientRect();
+
+           const leftPopover = document.querySelector("#pop4");
+           const leftPopoverRect = leftPopover.getBoundingClientRect();
+
+             // Calculating and moving the left and top value of the left popover
+             leftPopover.style.left = leftTriggerRect.left - leftPopoverRect.width - space ;
+             leftPopover.style.top = (leftTriggerRect.top + leftTriggerRect.bottom) / 2 - leftPopoverRect.height / 2;
+
+
+            
+
+
+
+
+
+
+
+          </script>
 
 </body>
 
