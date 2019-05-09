@@ -41,6 +41,7 @@ function calcPopoverPos(trigger,popover)
    if(placement==='left')
    {
       return {
+          left:triggerRect.left - popoverRect.width - space,
          top:(triggerRect.top + triggerRect.bottom) / 2 - popoverRect.height /2 
                }
    }
@@ -114,62 +115,29 @@ function calcPopoverPos(trigger,popover)
                 </div>
         
         
-        
           <script>
-             // Building the top trigger
-          const topTrigger = document.querySelector(".trigger[data-placement=top]");
-          const topPopover = document.querySelector("#pop1");
-
-          // Calculating and moving the top value of the top popover
-
-          const popoverPosition = calcPopoverPos(topTrigger,topPopover);
-          topPopover.style.left = `${popoverPosition.left}px`;
-          topPopover.style.top = `${popoverPosition.top}px`;
 
 
-        
+         const triggers = Array.from(document.querySelectorAll(".trigger"));
          
+         triggers.forEach(trigger =>
+         {
+            const popover = document.querySelector(`#${trigger.dataset.target}`);
+            const popoverPos = calcPopoverPos(trigger,popover);
+            popover.style.left = `${popoverPos.left}px`;
+            popover.style.top = `${popoverPos.top}px`;
 
-         
-        
+            trigger.addEventListener('click', e => 
+            {
+              popover.classList.toggle('is-displayed')
+           })
+         });
 
-         // Building the popover buttom
 
-         const bottomTrigger = document.querySelector(".trigger[data-placement=bottom]");
-         const bottomPopover = document.querySelector("#pop3");
-         
-        
-       // Calculating and moving the left and top value of the buttom popover
-       
-       const popoverPosition2 = calcPopoverPos(bottomTrigger,bottomPopover);
-       bottomPopover.style.left = `${popoverPosition2.left}px`;
-       bottomPopover.style.top = `${popoverPosition2.top}px`;
-         
+     
+
+
       
-
-
-      // Building the popover right
-       const rightTrigger = document.querySelector(".trigger[data-placement=right]");
-       const rightPopover = document.querySelector("#pop2");
-       
-
-         // Calculating and moving the left and top value of the right popover
-       const popoverPosition3 = calcPopoverPos(rightTrigger,rightPopover);
-       rightPopover.style.left = `${popoverPosition3.left}px`;
-       rightPopover.style.top = `${popoverPosition3.top}px`;
-
-
-          // Building the popover left
-
-           const leftTrigger = document.querySelector(".trigger[data-placement = left]");
-           const leftPopover = document.querySelector("#pop4");
-           
-
-             // Calculating and moving the left and top value of the left popover
-            const popoverPosition4 = calcPopoverPos(leftTrigger,leftPopover);
-           
-            leftPopover.style.top = `${popoverPosition4.top}px`;
-
           </script>
 
 </body>
